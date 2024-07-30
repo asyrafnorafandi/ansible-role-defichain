@@ -1,0 +1,17 @@
+changi=1
+
+[changi]
+maxconnections=512
+server=1
+spv=1
+spv_testnet=1
+txindex=1
+rest=1
+{# Setup rpc credentials if any #}
+{% if rpc_credentials is defined %}
+rpcuser={{ rpc_credentials['rpcuser'] }}
+rpcpassword={{ rpc_credentials['rpcpassword'] }}
+rpcbind={{ rpc_credentials['rpcbind'] }}
+rpcallowip={{ rpc_credentials['rpcallowip'] }}
+rpcworkqueue=1000
+{% endif %}

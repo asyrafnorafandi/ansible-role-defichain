@@ -1,0 +1,14 @@
+[main]
+maxconnections=512
+server=1
+{% for conf in dfi_custom_conf -%}
+{{ conf }}={{ dfi_custom_conf[conf] }}
+{% endfor %}
+{# Setup rpc credentials if any #}
+{% if rpc_credentials is defined %}
+rpcuser={{ rpc_credentials['rpcuser'] }}
+rpcpassword={{ rpc_credentials['rpcpassword'] }}
+rpcbind={{ rpc_credentials['rpcbind'] }}
+rpcallowip={{ rpc_credentials['rpcallowip'] }}
+rpcworkqueue=1000
+{% endif %}

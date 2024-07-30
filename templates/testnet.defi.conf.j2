@@ -1,0 +1,20 @@
+testnet=1
+
+[test]
+{% for conf in dfi_custom_conf -%}
+{{ conf }}={{ dfi_custom_conf[conf] }}
+{% endfor %}
+{# Setup rpc credentials if any #}
+{% if rpc_credentials is defined %}
+rpcuser={{ rpc_credentials['rpcuser'] }}
+rpcpassword={{ rpc_credentials['rpcpassword'] }}
+rpcbind={{ rpc_credentials['rpcbind'] }}
+rpcallowip={{ rpc_credentials['rpcallowip'] }}
+rpcworkqueue=1000
+{% endif %}
+{# Add P2P node ips #}
+{% for host in dfi_p2p_group %}
+{% if host != inventory_hostname %}
+addnode={{hostvars[host].ansible_host}}
+{% endif %}
+{% endfor %}
